@@ -1,0 +1,7 @@
+{
+  "name": "IWA Note: AI Meeting Assistant",
+  "description": "An intelligent notepad for meetings that takes notes, records and transcribes voice memos, manages to-do lists, and sets calendar events, all saved to the cloud.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
