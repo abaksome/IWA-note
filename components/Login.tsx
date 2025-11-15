@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
 import { NoteIcon } from './icons';
+import { useTheme } from './Theme';
 
 interface LoginProps {
   onLoginSuccess: (user: { name: string; email: string }) => void;
@@ -11,6 +11,8 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(true);
+  const { theme } = useTheme();
+  const { colors } = theme;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,14 +22,14 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-slate-900">
-      <div className="w-full max-w-md p-8 space-y-8 bg-slate-800 rounded-2xl shadow-2xl">
+    <div className={`flex items-center justify-center min-h-screen ${colors.bgPrimary}`}>
+      <div className={`w-full max-w-md p-8 space-y-8 ${colors.bgSecondary} rounded-2xl shadow-2xl`}>
         <div className="text-center">
             <div className="flex justify-center items-center mb-4">
-                <NoteIcon className="h-12 w-12 text-indigo-400" />
-                <h1 className="text-4xl font-bold ml-3 bg-gradient-to-r from-indigo-400 to-purple-500 text-transparent bg-clip-text">IWA Note</h1>
+                <NoteIcon className={`h-12 w-12 ${colors.iconAccent}`} />
+                <h1 className={`text-4xl font-bold ml-3 bg-gradient-to-r ${colors.textAccentGradient} text-transparent bg-clip-text`}>IWA Note</h1>
             </div>
-          <p className="mt-2 text-lg text-slate-400">Your AI-Powered Meeting Assistant</p>
+          <p className={`mt-2 text-lg ${colors.textSecondary}`}>Your AI-Powered Meeting Assistant</p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
@@ -38,7 +40,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                   name="name"
                   type="text"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-3 border border-slate-700 bg-slate-900 placeholder-slate-500 text-white rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className={`appearance-none rounded-none relative block w-full px-3 py-3 border ${colors.border} ${colors.bgPrimary} ${colors.placeholder} ${colors.textPrimary} rounded-t-md focus:outline-none ${colors.accentFocusRing} focus:z-10 sm:text-sm`}
                   placeholder="Full Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -52,7 +54,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                 type="email"
                 autoComplete="email"
                 required
-                className={`appearance-none rounded-none relative block w-full px-3 py-3 border border-slate-700 bg-slate-900 placeholder-slate-500 text-white ${isSignUp ? '' : 'rounded-t-md'} focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
+                className={`appearance-none rounded-none relative block w-full px-3 py-3 border ${colors.border} ${colors.bgPrimary} ${colors.placeholder} ${colors.textPrimary} ${isSignUp ? '' : 'rounded-t-md'} focus:outline-none ${colors.accentFocusRing} focus:z-10 sm:text-sm`}
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -65,7 +67,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-slate-700 bg-slate-900 placeholder-slate-500 text-white rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className={`appearance-none rounded-none relative block w-full px-3 py-3 border ${colors.border} ${colors.bgPrimary} ${colors.placeholder} ${colors.textPrimary} rounded-b-md focus:outline-none ${colors.accentFocusRing} focus:z-10 sm:text-sm`}
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -76,7 +78,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-slate-800 transition-colors"
+              className={`group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md ${colors.accentText} ${colors.accent} ${colors.accentHover} focus:outline-none focus:ring-2 focus:ring-offset-2 ${colors.accentFocusRing} focus:ring-offset-slate-800 transition-colors`}
             >
               {isSignUp ? 'Sign up' : 'Sign in'}
             </button>
@@ -85,7 +87,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
         <div className="text-sm text-center">
           <button
             onClick={() => setIsSignUp(!isSignUp)}
-            className="font-medium text-indigo-400 hover:text-indigo-300"
+            className={`font-medium ${colors.textAccent} ${colors.textAccentHover}`}
           >
             {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
           </button>

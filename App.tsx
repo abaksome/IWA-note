@@ -1,10 +1,11 @@
-
 import React, { useState, useEffect } from 'react';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
+import { useTheme } from './components/Theme';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const loggedInStatus = localStorage.getItem('isLoggedIn');
@@ -26,7 +27,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 font-sans">
+    <div className={`min-h-screen font-sans ${theme.colors.bgPrimary}`}>
       {isLoggedIn ? (
         <Dashboard onLogout={handleLogout} />
       ) : (
